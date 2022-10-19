@@ -7,18 +7,17 @@ body {
 .container, .markup-container {
     display: flex;
     justify-content: center;
-    
+
     padding: 10px;
     width: 100%;
 
     background-color: rgb(0, 140, 255);
 
-    border: 1px solid tomato;
+    border: 1px solid tomato;      // delete in the end of development!!!!!!!!!
 }
 
 .markup-container{
     flex-direction: column;
-
     background-color: inherit;
 }
 
@@ -38,3 +37,5 @@ button, input {
     display: block;
     list-style-type: none;
 }
+
+
