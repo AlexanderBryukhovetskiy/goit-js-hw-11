@@ -1,11 +1,11 @@
 
 export const refs = {
-    searchForm : document.querySelector('#search-form'),
+    searchForm : document.querySelector('form#search-form'),
     input : document.querySelector('input[name="searchQuery"]'),
     submitBtn : document.querySelector('button[type="submit"]'),
     list : document.querySelector('.list'),
     guarder : document.querySelector('.guarder'),
-
+        
     //insure() {console.log('refs contains next : ', this)}
 }
 
