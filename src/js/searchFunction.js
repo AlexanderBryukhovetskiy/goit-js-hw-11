@@ -4,19 +4,7 @@ import Notiflix from "notiflix";
 const axios = require('axios').default;
 
 
-
-
-/* ===================== ПЕРЕПИСАТЬ ПОД ТЕКУЩИЙ ПРОЕКТ  ===============
-https://pixabay.com/api/?key=30822963-d0fd13470d1d847e8cb7d7e51&q=yellow+flowers&image_type=photo
-
-image_type - тип зображення. На потрібні тільки фотографії, тому постав значення photo.
-orientation - орієнтація фотографії. Постав значення horizontal.
-safesearch - фільтр за віком. Постав значення true.
-*/
-
-
-
-export function getPictures(){
+export function getPictures(params){
     
     const URL = 'https://pixabay.com/api/';
     const KEY = '30822963-d0fd13470d1d847e8cb7d7e51';
@@ -27,34 +15,25 @@ export function getPictures(){
         return
     }
     
-    const respData = axios.get(`${URL}?key=${KEY}&q=${searchName}&image_type=photo&orientation=horizontal&safesearch=true`)
+    const response = axios.get(`${URL}?key=${KEY}&q=${searchName}&image_type=photo&orientation=horizontal&safesearch=true`)
 
     .then( response => {
-        if ( response.data.totalHits <= 0 ) {
+        if ( !response.ok || response.data.totalHits <= 0 || response.status === 404) {
             emptyMarkup();
             throw new Error();
-        // if ( response.data.totalHits > 0 ) {
-
-        //   console.log('response:  ', response);
-        //   console.log('response.data.totalHits  = ' , response.data.totalHits);
-
-        // }       
-
-        // else {
-        //   emptyMarkup();
-        //   throw new Error();
-        // }
         }
+
+        return response;   
     })
 
     .catch(error => {     
 
     Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.', emptyMarkup());
     
-        console.log(error);
+    console.log(error);
     })
     
-    return respData;
+    return response;
     /*
         .then(response => {
 

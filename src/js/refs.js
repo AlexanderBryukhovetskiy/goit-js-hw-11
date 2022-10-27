@@ -2,8 +2,9 @@
 export const refs = {
     searchForm : document.querySelector('form#search-form'),
     input : document.querySelector('input[name="searchQuery"]'),
-    submitBtn : document.querySelector('button[type="submit"]'),
+   // submitBtn : document.querySelector('button[type="submit"]'),
     list : document.querySelector('.list'),
+    loadMoreBtn: document.querySelector('.load-more'), 
     guarder : document.querySelector('.guarder'),
         
     //insure() {console.log('refs contains next : ', this)}

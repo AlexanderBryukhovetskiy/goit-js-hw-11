@@ -2,6 +2,11 @@
 
 body {
     align-items: center;
+} 
+
+ul {
+    margin: 0;
+    padding: 0;
 }
 
 .container, .markup-container {
@@ -11,13 +16,10 @@ body {
     padding: 10px;
     max-width: 100%;
 
-    background-color: rgb(0, 140, 255);
-
-    border: 1px solid tomato;      // delete in the end of development!!!!!!!!!
+    background-color: rgba(10, 103, 217, 0.91);
 }
 
 .markup-container{
-    flex-direction: column;
     background-color: inherit;
 }
 
@@ -36,13 +38,14 @@ button, input {
 .list {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 10px;
     list-style-type: none;
 }
 
 .info {
     display: flex;
-    align-items: stretch;
+    justify-content: center;
     gap: 5px;
 
     border: 1px solid rgb(189, 186, 186);
@@ -57,12 +60,15 @@ button, input {
     row-gap: 5px;
 
     font-size: 12px;
-
 }
 
 img {
     display: block;
-    width: 210px;
-    height: 150px;
+    width: 220px;
+    height: 160px;
 }
 
+.load-more {
+    margin: 0px auto;
+    background-color: rgba(10, 103, 217, 0.91);
+}
