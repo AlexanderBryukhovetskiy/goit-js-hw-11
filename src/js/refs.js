@@ -3,7 +3,7 @@ export const refs = {
     searchForm : document.querySelector('form#search-form'),
     input : document.querySelector('input[name="searchQuery"]'),
    // submitBtn : document.querySelector('button[type="submit"]'),
-    list : document.querySelector('.list'),
+    gallery : document.querySelector('.gallery'),
     loadMoreBtn: document.querySelector('.load-more'), 
     guarder : document.querySelector('.guarder'),
         

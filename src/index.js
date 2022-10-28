@@ -1,18 +1,12 @@
-// all modules
-
 import Notiflix from 'notiflix';
-import simpleLightbox from 'simplelightbox';
+import SimpleLightbox from 'simplelightbox';
+import 'simpleLightbox/dist/simple-lightbox.min.css';
 const axios = require('axios').default;
 
 import { refs } from './js/refs';
 import { emptyMarkup, renderMarkup } from './js/markupFunctions';
-
-// import { getPictures } from './js/searchFunction'
-
-const URL = 'https://pixabay.com/api/';
-const KEY = '30822963-d0fd13470d1d847e8cb7d7e51';
-
-let page = 1;
+import { getPictures } from './js/searchFunction';
+import { onLoad } from './js/onLoadFunction';
 
 refs.loadMoreBtn.hidden = true;
 
@@ -20,52 +14,38 @@ refs.searchForm.addEventListener('submit', onSearch);
 
 async function onSearch (event) { 
     event.preventDefault();
+    emptyMarkup();
 
     const searchName = refs.input.value.trim();
-    
-    let markup = '';
-
-    if (searchName === '') { 
-        Notiflix.Notify.info('Sorry, search query can not be empty. Please try again.', emptyMarkup());
-        return
-    }
-    //console.log('searchName (before axios.get-request): ', searchName);
 
     try {
-        const response = await axios.get(`${URL}?key=${KEY}&q=${searchName}&image_type=photo&orientation=horizontal&safesearch=true&per_page=40&page=${page}`)
-        
+      await getPictures(searchName)
+      .then( response => {
+   
         if ( response.data.totalHits > 0 ) {
 
-            // console.log('response:  ', response);
-            // console.log('response.data.totalHits  = ' , response.data.totalHits);
+          // console.log('response:  ', response);
+          console.log('response.data.totalHits (after SUBMIT): ' , response.data.totalHits);
 
-            markup = renderMarkup(response);
-            refs.list.innerHTML = markup;
+          Notiflix.Notify.success(`Hooray! We found ${response.data.totalHits} images.`);
+
+          refs.gallery.insertAdjacentHTML('beforeend', renderMarkup(response));
+
+          const lightbox = new SimpleLightbox ('.gallery a', {
+            showCounter: false});
+          
+          refs.loadMoreBtn.hidden = false;
+
+          refs.loadMoreBtn.addEventListener('click', onLoad);
+          lightbox.refresh();
         }       
-
         else {
             emptyMarkup();
             throw new Error();
         }
+      })
     }
-    catch (error)  {     
-
-            Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.', emptyMarkup());
-            
-            console.log(error);
-    }
-    
-    refs.loadMoreBtn.hidden = false;
-    refs.loadMoreBtn.addEventListener('click', onLoadMore);
-}
-
-async function onLoadMore () {
-    page += 1;
-
-    const searchName = refs.input.value.trim();
-
-    const response = await axios.get(`${URL}?key=${KEY}&q=${searchName}&image_type=photo&orientation=horizontal&safesearch=true&per_page=40&page=${page}`);
-    
-    markup = renderMarkup(response, page);
-    refs.list.insertAdjacentHTML('beforeend', markup);
+      
+    catch (error) {     
+    }  
 }
