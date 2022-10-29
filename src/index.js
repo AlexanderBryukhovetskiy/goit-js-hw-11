@@ -38,6 +38,16 @@ async function onSearch (event) {
 
           refs.loadMoreBtn.addEventListener('click', onLoad);
           lightbox.refresh();
+
+          
+          if (refs.gallery.childElementCount >= response.data.totalHits || response.status === 400) {
+          
+            refs.loadMoreBtn.hidden = true;
+            
+            Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
+    
+            throw new Error();
+          }
         }       
         else {
             emptyMarkup();
