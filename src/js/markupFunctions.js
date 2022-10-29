@@ -6,7 +6,7 @@ export function emptyMarkup () {
 }
 
 export function renderMarkup (response) {
-    console.log('it is responce.data.hits inside renderMarkup(): ', response.data.hits);
+    //console.log('it is responce.data.hits inside renderMarkup(): ', response.data.hits);
 
     const responseArray = response.data.hits;
     

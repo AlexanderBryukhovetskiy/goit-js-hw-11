@@ -1,6 +1,6 @@
 import Notiflix from 'notiflix';
 import SimpleLightbox from 'simplelightbox';
-import 'simpleLightbox/dist/simple-lightbox.min.css';
+import "simplelightbox/dist/simple-lightbox.min.css";
 const axios = require('axios').default;
 
 import { refs } from './js/refs';
@@ -25,7 +25,7 @@ async function onSearch (event) {
         if ( response.data.totalHits > 0 ) {
 
           // console.log('response:  ', response);
-          console.log('response.data.totalHits (after SUBMIT): ' , response.data.totalHits);
+          //console.log('response.data.totalHits (after SUBMIT): ' , response.data.totalHits);
 
           Notiflix.Notify.success(`Hooray! We found ${response.data.totalHits} images.`);
 

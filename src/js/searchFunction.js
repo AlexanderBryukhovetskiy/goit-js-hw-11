@@ -17,7 +17,7 @@ export async function getPictures(searchName) {
 
     return axios.get(`${URL}?key=${KEY}&q=${searchName}&image_type=photo&orientation=horizontal&safesearch=true&per_page=40&page=1`)
     .then( response => {
-        console.log('this is RESPONSE inside searchFunction: ', response)
+        //console.log('this is RESPONSE inside searchFunction: ', response)
         
         if ( response.data.hits <= 0 || response.status === 404) {
             emptyMarkup();

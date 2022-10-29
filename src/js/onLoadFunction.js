@@ -1,7 +1,7 @@
 import {refs} from './refs';
 import { renderMarkup } from "./markupFunctions"; 
 import SimpleLightbox from 'simplelightbox';
-import 'simpleLightbox/dist/simple-lightbox.min.css';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 import Notiflix from "notiflix";
 
 const axios = require('axios').default;
@@ -27,13 +27,13 @@ export async function onLoad() {
         
         lightbox.refresh();
 
-                console.log(`refs.gallery.childElementCount after onLoad page ${page}: `, refs.gallery.childElementCount);
+            //    console.log(`refs.gallery.childElementCount after onLoad page ${page}: `, refs.gallery.childElementCount);
 
-        if (refs.gallery.childElementCount >= response.data.totalHits || response.status === 404) {
+        if (refs.gallery.childElementCount >= response.data.totalHits || response.status === 400) {
         
             refs.loadMoreBtn.hidden = true;
     
-            throw new Error();
+            //throw new Error();
         }
     })
     .catch (error => {     
