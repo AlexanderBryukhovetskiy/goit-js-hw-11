@@ -33,7 +33,7 @@ export async function onLoad() {
         
             refs.loadMoreBtn.hidden = true;
     
-            //throw new Error();
+            throw new Error();
         }
     })
     .catch (error => {     
