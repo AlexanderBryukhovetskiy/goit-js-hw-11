@@ -30,7 +30,7 @@ export async function onLoad() {
             //    console.log(`refs.gallery.childElementCount after onLoad page ${page}: `, refs.gallery.childElementCount);
 
         if (response.status === 400 
-            //|| refs.gallery.childElementCount >= response.data.totalHits 
+            || refs.gallery.childElementCount >= response.data.totalHits 
             ) {
         
             refs.loadMoreBtn.hidden = true;
@@ -40,7 +40,7 @@ export async function onLoad() {
     })
     .catch (error => {     
 
-        //  Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
+          Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
             
             console.log(error);
     })
