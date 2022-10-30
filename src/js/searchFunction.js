@@ -12,23 +12,24 @@ export async function getPictures(searchName) {
    
     if (searchName === '') { 
         Notiflix.Notify.info('Sorry, search query can not be empty. Please try again.', emptyMarkup());
+        refs.input.value = "";
+        refs.loadMoreBtn.hidden = true;
         return
     }
 
-    return axios.get(`${URL}?key=${KEY}&q=${searchName}&image_type=photo&orientation=horizontal&safesearch=true&per_page=40&page=1`)
-    .then( response => {
-        //console.log('this is RESPONSE inside searchFunction: ', response)
+    const response = await axios.get(`${URL}?key=${KEY}&q=${searchName}&image_type=photo&orientation=horizontal&safesearch=true&per_page=40&page=1`);
         
-        if ( response.data.hits <= 0 || response.status === 404) {
-            emptyMarkup();
-            throw new Error();
-        }
-        return response;
-    })
-    .catch(error => {     
+    if ( response.data.hits <= 0 || response.status === 404) {
+        
 
-            Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.', emptyMarkup());
-            
-            console.log(error);
-    })
+        Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.', emptyMarkup());
+        
+        refs.loadMoreBtn.hidden = true;
+
+        refs.input.value = "";
+        
+        throw new Error();
+    }
+    
+    return response;
 }
