@@ -33,23 +33,26 @@ async function onSearch (event) {
 
         const lightbox = new SimpleLightbox ('.gallery a', {
               showCounter: false});
-        
-        refs.loadMoreBtn.hidden = false;
-
-        localStorage.setItem('searchName', searchName);
-
-       // console.log('searchName from localStorage : ', localStorage.getItem('searchName'));
 
         refs.input.value = "";
+        
+          if (response.data.totalHits > 40) {
 
-        refs.loadMoreBtn.addEventListener('click', onLoad);
-        lightbox.refresh();
+          refs.loadMoreBtn.hidden = false;
+
+          localStorage.setItem('searchName', searchName);
+
+          // console.log('searchName from localStorage : ', localStorage.getItem('searchName'));
+
+          refs.loadMoreBtn.addEventListener('click', onLoad);
+
+          lightbox.refresh();
+          }
       }       
       else {
           emptyMarkup();
           throw new Error();
       }
-        
     }
 
     catch (error) { 
